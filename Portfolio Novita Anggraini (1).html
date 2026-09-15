@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novita Anggraini — Data Enthusiast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF1DE;
+    --cream-2:#FFFBF1;
+    --brown:#2A1B10;
+    --brown-soft:#5A4230;
+    --brown-faint:#8A7360;
+    --yellow:#F5B935;
+    --yellow-deep:#E2A317;
+    --teal:#2C7A70;
+    --teal-deep:#1F5C54;
+    --berry:#C6493F;
+    --berry-deep:#A6382F;
+    --line:rgba(42,27,16,0.12);
+    --shadow: 6px 6px 0 rgba(42,27,16,0.12);
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --radius-sm: 10px;
+    --max: 1160px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--brown);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  h1,h2,h3,h4{font-family:'Fredoka', sans-serif; font-weight:600; color:var(--brown); line-height:1.15;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--yellow); color:var(--brown);}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* ---------- Scrollbar / focus ---------- */
+  :focus-visible{outline:3px solid var(--teal); outline-offset:3px; border-radius:6px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:500;
+    background:rgba(251,241,222,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+    transition: box-shadow .3s ease;
+  }
+  header.scrolled{ box-shadow: 0 6px 24px rgba(42,27,16,0.08); }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; max-width:var(--max); margin:0 auto;
+  }
+  .brand{
+    font-family:'Fredoka', sans-serif; font-weight:700; font-size:1.3rem;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand .dot{
+    width:12px; height:12px; border-radius:50%; background:var(--yellow);
+    box-shadow: 0 0 0 4px rgba(245,185,53,0.28);
+  }
+  nav.links{display:flex; gap:30px; align-items:center;}
+  nav.links a{
+    font-weight:600; font-size:0.96rem; color:var(--brown-soft);
+    position:relative; padding:4px 0;
+  }
+  nav.links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:3px;
+    background:var(--yellow); border-radius:3px; transition:width .25s ease;
+  }
+  nav.links a:hover::after, nav.links a.active::after{width:100%;}
+  nav.links a.active{color:var(--brown);}
+  .nav-cta{
+    background:var(--brown); color:var(--cream-2); padding:10px 20px;
+    border-radius:100px; font-weight:700; font-size:0.9rem;
+    border:2px solid var(--brown);
+  }
+  .nav-cta:hover{background:transparent; color:var(--brown);}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .burger span{width:26px; height:3px; background:var(--brown); border-radius:3px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; padding:168px 0 90px; overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:50px; align-items:center;
+  }
+  .badge-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--cream-2); border:2px solid var(--brown);
+    padding:8px 18px; border-radius:100px; font-weight:700; font-size:0.85rem;
+    margin-bottom:22px;
+  }
+  .badge-pill svg{width:14px; height:14px;}
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.4rem);
+    letter-spacing:-0.5px;
+    margin-bottom:18px;
+  }
+  .hero h1 .line2{display:block; color:var(--teal);}
+  .hero p.lead{
+    font-size:1.08rem; color:var(--brown-soft); max-width:520px; margin-bottom:30px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:40px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; border-radius:100px; font-weight:700; font-size:0.95rem;
+    cursor:pointer; border:2px solid var(--brown); transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-primary{background:var(--yellow); color:var(--brown);}
+  .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:var(--shadow);}
+  .btn-ghost{background:transparent; color:var(--brown);}
+  .btn-ghost:hover{background:var(--brown); color:var(--cream-2);}
+
+  .hero-meta{display:flex; gap:28px; flex-wrap:wrap;}
+  .hero-meta div{font-size:0.85rem; color:var(--brown-faint); font-weight:600;}
+  .hero-meta strong{display:block; font-family:'Fredoka'; font-size:1rem; color:var(--brown); font-weight:600;}
+
+  .hero-art{position:relative; display:flex; justify-content:center; align-items:center; min-height:420px;}
+  .avatar-card{
+    position:relative; width:300px; height:360px; border-radius:36px;
+    background:linear-gradient(160deg, var(--yellow) 0%, var(--yellow-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    border:3px solid var(--brown);
+    box-shadow: 10px 10px 0 rgba(42,27,16,0.14);
+    z-index:3;
+  }
+  .avatar-card .initials{
+    font-family:'Fredoka'; font-weight:700; font-size:5.4rem; color:var(--brown); opacity:0.92;
+  }
+  .float-chip{
+    position:absolute; background:var(--cream-2); border:2px solid var(--brown);
+    border-radius:16px; padding:10px 14px; font-size:0.78rem; font-weight:700;
+    display:flex; align-items:center; gap:8px; box-shadow:5px 5px 0 rgba(42,27,16,0.1);
+    animation: floaty 5s ease-in-out infinite;
+  }
+  .float-chip.c1{ top:6%; left:-6%; z-index:4; animation-delay:0s;}
+  .float-chip.c2{ bottom:14%; right:-10%; z-index:4; animation-delay:1.2s; color:var(--teal);}
+  .float-chip.c3{ bottom:-4%; left:14%; z-index:4; animation-delay:2.4s; color:var(--berry);}
+  .float-chip .dotcol{width:8px; height:8px; border-radius:50%; background:var(--teal);}
+  .float-chip.c3 .dotcol{background:var(--berry);}
+  .float-chip.c1 .dotcol{background:var(--yellow-deep);}
+  @keyframes floaty{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .orbit-dots{position:absolute; inset:0; z-index:1; pointer-events:none;}
+  .orbit-dots svg{width:100%; height:100%;}
+
+  /* ---------- SECTION helpers ---------- */
+  section{padding:100px 0;}
+  .sec-head{max-width:640px; margin-bottom:56px;}
+  .sec-head .kicker{
+    display:inline-block; background:var(--brown); color:var(--yellow);
+    padding:6px 16px; border-radius:100px; font-weight:700; font-size:0.78rem;
+    margin-bottom:16px;
+  }
+  .sec-head h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem);}
+  .sec-head p{color:var(--brown-soft); margin-top:12px; font-size:1.02rem;}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- STATS STRIP ---------- */
+  .stats{
+    background:var(--brown); color:var(--cream-2); padding:52px 0;
+  }
+  .stats .wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center;}
+  .stats .num{font-family:'Fredoka'; font-size:2.5rem; color:var(--yellow); font-weight:700;}
+  .stats .lbl{font-size:0.85rem; color:#D8C9B8; font-weight:600; margin-top:4px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start;}
+  .quote-card{
+    background:var(--teal); color:var(--cream-2); border-radius:var(--radius-lg);
+    padding:36px; border:3px solid var(--brown); box-shadow:var(--shadow);
+  }
+  .quote-card p{font-family:'Fredoka'; font-size:1.3rem; font-weight:500; line-height:1.4;}
+  .quote-card .who{margin-top:18px; font-size:0.85rem; color:#CFE9E4; font-weight:600;}
+  .about-text p{color:var(--brown-soft); margin-bottom:18px; font-size:1.02rem;}
+  .about-tags{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;}
+  .about-tags span{
+    background:var(--cream-2); border:2px solid var(--line); padding:8px 14px;
+    border-radius:100px; font-size:0.82rem; font-weight:700; color:var(--brown-soft);
+  }
+  .mini-cards{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:26px;}
+  .mini-card{
+    background:var(--cream-2); border:2px solid var(--brown); border-radius:var(--radius-md);
+    padding:18px; transition:transform .2s ease;
+  }
+  .mini-card:hover{transform:translateY(-4px);}
+  .mini-card .mc-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;}
+  .mini-card h4{font-size:0.98rem;}
+  .mini-card .yr{font-size:0.72rem; font-weight:700; color:var(--yellow-deep); background:#FFF6DE; padding:3px 8px; border-radius:100px;}
+  .mini-card p{font-size:0.84rem; color:var(--brown-faint);}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:36px 56px;}
+  .skill-group h3{font-size:1.1rem; margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .skill-group h3 .sw{width:10px; height:10px; border-radius:3px;}
+  .tool-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .tool-card{
+    background:var(--cream-2); border:2px solid var(--brown); border-radius:var(--radius-md);
+    padding:16px 10px; text-align:center; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .tool-card:hover{transform:translateY(-5px); box-shadow:4px 4px 0 rgba(42,27,16,0.14);}
+  .tool-icon{
+    width:52px; height:52px; border-radius:50%; margin:0 auto 10px;
+    display:flex; align-items:center; justify-content:center; border:2px solid var(--brown);
+  }
+  .tool-icon svg{width:26px; height:26px;}
+  .tool-card .tname{font-size:0.8rem; font-weight:700; line-height:1.25;}
+  .soft-skills{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;}
+  .soft-skills span{
+    background:var(--cream-2); border:1.5px solid var(--line); padding:7px 13px;
+    font-size:0.8rem; font-weight:700; border-radius:100px; color:var(--brown-soft);
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{position:relative; padding-left:32px; border-left:3px dashed var(--brown-faint);}
+  .tl-item{position:relative; padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute; left:-42px; top:2px; width:20px; height:20px; border-radius:50%;
+    background:var(--yellow); border:3px solid var(--brown);
+  }
+  .tl-card{
+    background:var(--cream-2); border:2px solid var(--brown); border-radius:var(--radius-md);
+    padding:24px 26px; box-shadow:4px 4px 0 rgba(42,27,16,0.08);
+  }
+  .tl-card .tl-top{display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:6px;}
+  .tl-card h4{font-size:1.15rem;}
+  .tl-card .role{color:var(--teal-deep); font-weight:700; font-size:0.9rem; margin-bottom:10px;}
+  .tl-card .when{font-size:0.8rem; font-weight:700; color:var(--brown-faint); white-space:nowrap;}
+  .tl-card ul{padding-left:20px; color:var(--brown-soft); font-size:0.94rem;}
+  .tl-card li{margin-bottom:6px;}
+
+  /* ---------- PROJECTS ---------- */
+  .tabs{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:36px;}
+  .tab-btn{
+    padding:11px 22px; border-radius:100px; border:2px solid var(--brown); background:var(--cream-2);
+    font-weight:700; font-size:0.88rem; cursor:pointer; transition:all .2s ease;
+    display:flex; align-items:center; gap:8px;
+  }
+  .tab-btn .cnt{
+    background:var(--brown); color:var(--cream); border-radius:100px; font-size:0.72rem; padding:2px 8px;
+  }
+  .tab-btn[data-cat="all"].is-active{background:var(--brown); color:var(--cream-2);}
+  .tab-btn[data-cat="all"].is-active .cnt{background:var(--yellow); color:var(--brown);}
+  .tab-btn[data-cat="analytics"].is-active{background:var(--yellow); border-color:var(--brown);}
+  .tab-btn[data-cat="ml"].is-active{background:var(--teal); color:#fff; border-color:var(--brown);}
+  .tab-btn[data-cat="web"].is-active{background:var(--berry); color:#fff; border-color:var(--brown);}
+  .tab-btn:hover{transform:translateY(-2px);}
+
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .proj-card{
+    background:var(--cream-2); border:2.5px solid var(--brown); border-radius:var(--radius-md);
+    overflow:hidden; cursor:pointer; transition: transform .25s ease, box-shadow .25s ease;
+    display:flex; flex-direction:column;
+  }
+  .proj-card:hover{transform:translateY(-6px); box-shadow:7px 7px 0 rgba(42,27,16,0.14);}
+  .proj-card.hide{display:none;}
+  .proj-thumb{
+    height:150px; position:relative; display:flex; align-items:flex-end; padding:14px;
+    background-size:180% 180%;
+  }
+  .proj-thumb.analytics{background:repeating-linear-gradient(135deg, var(--yellow) 0 18px, var(--yellow-deep) 18px 36px);}
+  .proj-thumb.ml{background:repeating-linear-gradient(135deg, var(--teal) 0 18px, var(--teal-deep) 18px 36px);}
+  .proj-thumb.web{background:repeating-linear-gradient(135deg, var(--berry) 0 18px, var(--berry-deep) 18px 36px);}
+  .proj-thumb .cat-chip{
+    background:rgba(255,255,255,0.9); color:var(--brown); font-size:0.7rem; font-weight:700;
+    padding:5px 12px; border-radius:100px;
+  }
+  .proj-body{padding:20px; flex:1; display:flex; flex-direction:column;}
+  .proj-body h4{font-size:1.05rem; margin-bottom:8px;}
+  .proj-body p{font-size:0.86rem; color:var(--brown-faint); flex:1; margin-bottom:14px;}
+  .proj-tags{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
+  .proj-tags span{font-size:0.7rem; font-weight:700; background:#F1E7D0; padding:4px 9px; border-radius:100px; color:var(--brown-soft);}
+  .proj-link{font-size:0.84rem; font-weight:700; display:flex; align-items:center; gap:6px; color:var(--brown);}
+  .proj-link svg{width:14px; height:14px; transition:transform .2s ease;}
+  .proj-card:hover .proj-link svg{transform:translateX(4px);}
+
+  /* ---------- CERTS ---------- */
+  .cert-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  .cert-card{
+    background:var(--cream-2); border:2px solid var(--line); border-radius:var(--radius-md);
+    padding:20px; text-align:center; transition:border-color .2s ease, transform .2s ease;
+  }
+  .cert-card:hover{border-color:var(--brown); transform:translateY(-4px);}
+  .cert-card .cert-badge{
+    width:52px; height:52px; border-radius:50%; background:var(--yellow); margin:0 auto 12px;
+    display:flex; align-items:center; justify-content:center; border:2px solid var(--brown);
+  }
+  .cert-card h4{font-size:0.92rem; margin-bottom:4px;}
+  .cert-card p{font-size:0.76rem; color:var(--brown-faint); font-weight:600;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--brown); border-radius:40px; padding:64px 56px; color:var(--cream-2);
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px; align-items:center;
+    position:relative; overflow:hidden;
+  }
+  .contact::before{
+    content:''; position:absolute; width:340px; height:340px; border-radius:50%;
+    background:var(--yellow); opacity:0.14; right:-100px; top:-120px;
+  }
+  .contact h2{color:var(--cream-2); font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:14px;}
+  .contact p{color:#D8C9B8; max-width:420px; margin-bottom:26px;}
+  .contact-list{display:flex; flex-direction:column; gap:14px;}
+  .contact-list a{
+    display:flex; align-items:center; gap:12px; font-weight:700; font-size:0.95rem;
+    background:rgba(255,255,255,0.06); padding:14px 18px; border-radius:14px;
+    border:1px solid rgba(255,255,255,0.14); transition:background .2s ease;
+  }
+  .contact-list a:hover{background:var(--yellow); color:var(--brown);}
+  .contact-list svg{width:18px; height:18px; flex-shrink:0;}
+  .avail-chip{
+    display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08);
+    padding:8px 16px; border-radius:100px; font-size:0.8rem; font-weight:700; margin-bottom:22px;
+  }
+  .avail-chip .pulse{width:8px; height:8px; border-radius:50%; background:#7BE0A4; box-shadow:0 0 0 4px rgba(123,224,164,0.25); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.4;}}
+
+  footer{padding:36px 0; text-align:center; color:var(--brown-faint); font-size:0.85rem; font-weight:600;}
+
+  /* ---------- MODAL ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(20,13,7,0.55); backdrop-filter:blur(4px);
+    display:none; align-items:center; justify-content:center; z-index:1000; padding:24px;
+    opacity:0; transition:opacity .25s ease;
+  }
+  .modal-backdrop.open{display:flex;}
+  .modal-backdrop.show{opacity:1;}
+  .modal-box{
+    background:var(--cream-2); border-radius:28px; border:3px solid var(--brown);
+    max-width:640px; width:100%; max-height:88vh; overflow-y:auto;
+    transform:scale(0.92) translateY(14px); opacity:0; transition:transform .28s cubic-bezier(.2,.8,.2,1), opacity .28s ease;
+  }
+  .modal-backdrop.show .modal-box{transform:scale(1) translateY(0); opacity:1;}
+  .modal-head{
+    padding:26px 30px; position:relative;
+  }
+  .modal-head .cat-chip{
+    display:inline-block; font-size:0.72rem; font-weight:700; padding:5px 13px; border-radius:100px;
+    background:rgba(255,255,255,0.85); color:var(--brown); margin-bottom:12px;
+  }
+  .modal-head h3{color:#fff; font-size:1.5rem;}
+  .modal-head.analytics{background:linear-gradient(135deg, var(--yellow), var(--yellow-deep));}
+  .modal-head.analytics h3{color:var(--brown);}
+  .modal-head.analytics .cat-chip{background:rgba(42,27,16,0.14); color:var(--brown);}
+  .modal-head.ml{background:linear-gradient(135deg, var(--teal), var(--teal-deep));}
+  .modal-head.web{background:linear-gradient(135deg, var(--berry), var(--berry-deep));}
+  .modal-close{
+    position:absolute; top:20px; right:22px; width:34px; height:34px; border-radius:50%;
+    background:rgba(255,255,255,0.85); border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close svg{width:16px; height:16px; color:var(--brown);}
+  .modal-thumb{height:120px; margin:0 24px; margin-top:-20px; border-radius:16px; border:2px solid var(--brown);
+    position:relative; overflow:hidden; box-shadow:4px 4px 0 rgba(42,27,16,0.12);}
+  .modal-thumb svg{width:100%; height:100%;}
+  .modal-body{padding:26px 30px 30px;}
+  .modal-tools{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:22px;}
+  .modal-tools span{font-size:0.74rem; font-weight:700; background:#F1E7D0; padding:5px 11px; border-radius:100px; color:var(--brown-soft);}
+  .star-row{display:flex; gap:14px; margin-bottom:18px;}
+  .star-row .star-tag{
+    flex-shrink:0; width:96px; font-weight:700; font-size:0.82rem;
+    display:flex; align-items:center; gap:8px; padding-top:2px;
+  }
+  .star-row .star-tag .sdot{width:9px; height:9px; border-radius:50%;}
+  .star-row p{font-size:0.92rem; color:var(--brown-soft);}
+  .star-row:last-child{margin-bottom:0;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .hero .wrap{grid-template-columns:1fr; text-align:left;}
+    .hero-art{margin-top:20px; min-height:340px;}
+    .about-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .proj-grid{grid-template-columns:repeat(2,1fr);}
+    .cert-grid{grid-template-columns:repeat(2,1fr);}
+    .contact{grid-template-columns:1fr; padding:44px 30px;}
+    .stats .wrap{grid-template-columns:repeat(2,1fr); gap:30px;}
+  }
+  @media (max-width: 720px){
+    nav.links{ position:fixed; top:70px; left:0; right:0; background:var(--cream-2);
+      flex-direction:column; padding:20px 28px; gap:18px; border-bottom:1px solid var(--line);
+      transform:translateY(-110%); transition:transform .3s ease; }
+    nav.links.open{transform:translateY(0);}
+    .burger{display:flex;}
+    .nav-cta{display:none;}
+    .proj-grid{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:1fr 1fr;}
+    .mini-cards{grid-template-columns:1fr;}
+    .tool-grid{grid-template-columns:repeat(3,1fr);}
+    section{padding:70px 0;}
+    .float-chip{font-size:0.68rem; padding:8px 10px;}
+    .star-row{flex-direction:column; gap:4px;}
+    .star-row .star-tag{width:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="nav">
+    <div class="brand"><span class="dot"></span>Novita Anggraini</div>
+    <nav class="links" id="navLinks">
+      <a href="#about">Tentang</a>
+      <a href="#skills">Skill</a>
+      <a href="#experience">Pengalaman</a>
+      <a href="#projects">Project</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Hubungi Saya</a>
+    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="orbit-dots" aria-hidden="true">
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+      <circle cx="1050" cy="90" r="4" fill="#E2A317" opacity="0.5"/>
+      <circle cx="1120" cy="180" r="3" fill="#2C7A70" opacity="0.4"/>
+      <circle cx="980" cy="220" r="5" fill="#C6493F" opacity="0.35"/>
+      <line x1="1050" y1="90" x2="1120" y2="180" stroke="#2A1B10" stroke-width="1" opacity="0.15"/>
+      <line x1="1120" y1="180" x2="980" y2="220" stroke="#2A1B10" stroke-width="1" opacity="0.15"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div>
+      <div class="badge-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+        Available for Internship / Entry-level
+      </div>
+      <h1>Data Enthusiast, <span class="line2">Novita Anggraini.</span></h1>
+      <p class="lead">Fresh graduate S1 Informatika yang senang mengubah data mentah jadi insight yang bisa dipakai untuk keputusan nyata — dari data cleaning, EDA, sampai machine learning dan dashboard.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">
+          Lihat Project
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost">Hubungi Saya</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>3.66 / 4.00</strong>IPK Informatika</div>
+        <div><strong>6 Project</strong>Data &amp; ML</div>
+        <div><strong>1M+ Baris</strong>Data Dianalisis</div>
+        <div><strong>98.1%</strong>Akurasi Model Terbaik</div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="avatar-card">
+        <span class="initials">NA</span>
+      </div>
+      <div class="float-chip c1"><span class="dotcol"></span>Python · SQL</div>
+      <div class="float-chip c2"><span class="dotcol"></span>Machine Learning</div>
+      <div class="float-chip c3"><span class="dotcol"></span>Power BI · GDS</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div><div class="num">1M+</div><div class="lbl">Baris Data Dianalisis</div></div>
+    <div><div class="num">6</div><div class="lbl">Project Diselesaikan</div></div>
+    <div><div class="num">2</div><div class="lbl">Pengalaman Magang</div></div>
+    <div><div class="num">100/100</div><div class="lbl">Nilai Pelatihan RevoU</div></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Tentang Saya</span>
+      <h2>Suka cerita di balik angka.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="quote-card reveal">
+        <p>"Data paling menarik ketika berubah jadi keputusan — bukan cuma angka di spreadsheet."</p>
+        <div class="who">— Novita Anggraini, Data Enthusiast</div>
+      </div>
+      <div class="about-text reveal">
+        <p>Saya fresh graduate S1 Informatika dari Universitas Tanjungpura dengan pengalaman di analisis data, pengolahan dataset berskala besar, pengembangan dashboard, dan implementasi machine learning. Terbiasa memakai Python, SQL, Excel, Power BI, Google Data Studio, dan BigQuery untuk data cleaning, EDA, hingga menghasilkan insight yang mendukung pengambilan keputusan.</p>
+        <p>Selain analisis, saya juga punya pemahaman database dan pengembangan solusi berbasis data — ingin berkembang di jalur Data Analytics maupun Data Engineering.</p>
+        <div class="about-tags">
+          <span>📍 Jakarta Selatan</span>
+          <span>🎓 S1 Informatika · 2021–2026</span>
+          <span>🏆 Bronze Medal, Mandalika Essay 2024</span>
+        </div>
+        <div class="mini-cards">
+          <div class="mini-card">
+            <div class="mc-top"><h4>Universitas Tanjungpura</h4><span class="yr">2021–2026</span></div>
+            <p>S1 Informatika · IPK 3.66/4.00. Fokus: Data Mining, Kecerdasan Buatan, NLP, IMK.</p>
+          </div>
+          <div class="mini-card">
+            <div class="mc-top"><h4>RevoU</h4><span class="yr">2023</span></div>
+            <p>Software &amp; Data Engineering — nilai akhir 100/100 (A).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:var(--cream-2);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Skill</span>
+      <h2>Tools &amp; kemampuan yang saya pakai sehari-hari.</h2>
+      <p>Dari pengolahan data mentah sampai visualisasi yang mudah dipahami stakeholder.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <h3><span class="sw" style="background:var(--yellow-deep);"></span>Bahasa &amp; Analisis Data</h3>
+        <div class="tool-grid">
+          <div class="tool-card">
+            <div class="tool-icon" style="background:var(--yellow);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2A1B10" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+            </div>
+            <div class="tname">Python</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon" style="background:var(--yellow);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2A1B10" stroke-width="2"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+            </div>
+            <div class="tname">SQL</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon" style="background:var(--yellow);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2A1B10" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg>
+            </div>
+            <div class="tname">Excel</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon" style="background:var(--yellow);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2A1B10" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.2-5.2"/><path d="M7.5 10h5M10 7.5v5"/></svg>
+            </div>
+            <div class="tname">EDA</div>
+          </div>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3><span class="sw" style="background:var(--teal);"></span>Visualisasi, BI &amp; Database</h3>
+        <div class="tool-grid">
+          <div class="tool-card">
+            <div class="tool-icon" style="background:var(--teal);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FBF1DE" stroke-width="2"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+            </div>
+            <div class="tname">Power BI</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon" style="background:var(--teal);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FBF1DE" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/><path d="M7 14l3-4 3 2 3-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="tname">Google Data Studio</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon" style="background:var(--teal);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FBF1DE" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/></svg>
+            </div>
+            <div class="tname">BigQuery &amp; MySQL</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-icon" style="background:var(--teal);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FBF1DE" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.7 7l4 3.6M6.7 17l4-3.6M14.4 12h2.6"/></svg>
+            </div>
+            <div class="tname">Machine Learning</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:34px;" class="reveal">
+      <h3 style="font-size:1.05rem; margin-bottom:14px;">Soft Skills</h3>
+      <div class="soft-skills">
+        <span>Berpikir Analitis</span><span>Pemecahan Masalah</span><span>Berpikir Kritis</span>
+        <span>Ketelitian</span><span>Komunikasi</span><span>Kerja Sama Tim</span>
+        <span>Manajemen Proyek</span><span>Adaptabilitas</span><span>Manajemen Waktu</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Pengalaman</span>
+      <h2>Belajar langsung dari data di lapangan.</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <h4>Kimia Farma</h4>
+            <span class="when">Sep — Okt 2025</span>
+          </div>
+          <div class="role">Big Data Analytics Intern (Project-Based)</div>
+          <ul>
+            <li>Menganalisis 1M+ data penjualan &amp; inventori dari 30+ cabang dengan SQL untuk melihat tren penjualan, repurchase pelanggan, dan performa cabang.</li>
+            <li>Mengintegrasikan data transaksi, produk, dan cabang menjadi satu dataset terpusat, lalu membangun laporan &amp; dashboard.</li>
+            <li>Mengurangi waktu pelaporan manual sebesar 40% dan menemukan kesenjangan pendapatan hingga 18% antar cabang.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <h4>Dinas Komunikasi &amp; Informatika Kubu Raya</h4>
+            <span class="when">Mar — Jun 2024</span>
+          </div>
+          <div class="role">Full Stack Intern</div>
+          <ul>
+            <li>Menyusun, membersihkan, dan menstandarkan 5.000+ data operasional untuk pelaporan yang lebih konsisten dan akurat.</li>
+            <li>Berkoordinasi dengan stakeholder untuk validasi data dan menjaga kualitas data.</li>
+            <li>Membantu mengembangkan &amp; memelihara sistem berbasis web dengan HTML, CSS, JavaScript, dan PHP.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="background:var(--cream-2);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Project</span>
+      <h2>Pilih kategori, lalu klik project untuk lihat detailnya.</h2>
+      <p>Setiap project dijelaskan singkat pakai format Situation → Task → Action → Result.</p>
+    </div>
+
+    <div class="tabs reveal" id="tabBar">
+      <button class="tab-btn is-active" data-cat="all">Semua <span class="cnt">6</span></button>
+      <button class="tab-btn" data-cat="analytics">Data Analytics &amp; BI <span class="cnt">2</span></button>
+      <button class="tab-btn" data-cat="ml">Machine Learning &amp; AI <span class="cnt">2</span></button>
+      <button class="tab-btn" data-cat="web">Web Development <span class="cnt">2</span></button>
+    </div>
+
+    <div class="proj-grid reveal" id="projGrid"></div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Sertifikasi</span>
+      <h2>Terus belajar, terus disertifikasi.</h2>
+    </div>
+    <div class="cert-grid reveal">
+      <div class="cert-card">
+        <div class="cert-badge">🤖</div>
+        <h4>AI for Data Processing</h4>
+        <p>BNSP · 2025–2028</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">📊</div>
+        <h4>Microsoft Excel</h4>
+        <p>MySkill · 2026</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">📈</div>
+        <h4>Microsoft Power BI</h4>
+        <p>MySkill · 2026</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🐍</div>
+        <h4>Python for Data Analysis</h4>
+        <p>MySkill · 2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div>
+        <div class="avail-chip"><span class="pulse"></span>Terbuka untuk peluang baru</div>
+        <h2>Mari diskusi soal data, dashboard, atau project bareng.</h2>
+        <p>Saya senang membahas ide baru soal analisis data, machine learning, atau pengembangan dashboard — jangan ragu menyapa lewat email atau LinkedIn.</p>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:novitanggraini90@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+          novitanggraini90@gmail.com
+        </a>
+        <a href="tel:+628969074106">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+          +62 896-9074-4106
+        </a>
+        <a href="https://linkedin.com/in/novitanggraini" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12"/><path d="M10 13a4 4 0 0 1 8 0v8"/></svg>
+          linkedin.com/in/novitanggraini
+        </a>
+        <a href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          Portfolio Canva
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Novita Anggraini · Dibuat dengan data, kopi, dan sedikit rasa penasaran.
+</footer>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-box" id="modalBox" role="dialog" aria-modal="true">
+    <div class="modal-head" id="modalHead">
+      <button class="modal-close" id="modalClose" aria-label="Tutup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <span class="cat-chip" id="modalCat">Kategori</span>
+      <h3 id="modalTitle">Judul Project</h3>
+    </div>
+    <div class="modal-thumb" id="modalThumb"></div>
+    <div class="modal-body">
+      <div class="modal-tools" id="modalTools"></div>
+      <div id="modalStar"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- DATA ----------
+  const CATS = {
+    analytics: { label:"Data Analytics & BI", color:"var(--yellow-deep)" },
+    ml: { label:"Machine Learning & AI", color:"var(--teal)" },
+    web: { label:"Web Development", color:"var(--berry)" }
+  };
+
+  const PROJECTS = [
+    {
+      id:1, cat:"analytics",
+      title:"Customer Profiling & Clustering",
+      summary:"Segmentasi 28.000 pelanggan e-commerce memakai K-Means untuk menemukan peluang retensi & upselling.",
+      tools:["Python","SQL","K-Means"],
+      star:{
+        s:"E-commerce butuh memahami pola perilaku 28.000 pelanggan untuk merancang strategi retensi yang tepat.",
+        t:"Membentuk segmentasi pelanggan berdasarkan data transaksi & karakteristik pelanggan.",
+        a:"Menerapkan algoritma K-Means Clustering di Python & SQL untuk membentuk 4 segmen pelanggan.",
+        r:"Menemukan 1,9% pelanggan yang berkontribusi 18% pendapatan, dengan proyeksi peningkatan pendapatan 8–12% lewat retensi, upselling & reaktivasi."
+      }
+    },
+    {
+      id:2, cat:"analytics",
+      title:"Big Data Analytics — Kimia Farma",
+      summary:"Mengolah 1M+ data penjualan & inventori dari 30+ cabang jadi dashboard pelaporan terpusat.",
+      tools:["SQL","Dashboarding","Data Integration"],
+      star:{
+        s:"Kimia Farma perlu menganalisis 1M+ data penjualan & inventori dari 30+ cabang secara efisien.",
+        t:"Mengidentifikasi tren penjualan, repurchase pelanggan, dan performa tiap cabang.",
+        a:"Mengintegrasikan data transaksi, produk & cabang jadi satu dataset terpusat, lalu membangun laporan & dashboard analitik dengan SQL.",
+        r:"Mengurangi waktu pelaporan manual sebesar 40% dan menemukan kesenjangan pendapatan hingga 18% antar cabang."
+      }
+    },
+    {
+      id:3, cat:"ml",
+      title:"Potato Leaf Disease Classification",
+      summary:"Model klasifikasi 7 kategori penyakit daun kentang dengan feature fusion ResNet50 + EfficientNetB0.",
+      tools:["Python","TensorFlow/Keras","ResNet50","EfficientNetB0","SMOTE"],
+      star:{
+        s:"Petani kentang butuh cara cepat & akurat mendeteksi penyakit daun kentang dari 7 kategori berbeda.",
+        t:"Membangun model klasifikasi citra penyakit daun kentang yang akurat.",
+        a:"Menggunakan 3.076 citra dengan preprocessing, augmentation, SMOTE, serta feature fusion ResNet50 + EfficientNetB0.",
+        r:"Mencapai akurasi 98,14%, precision 97,50%, dan F1-score 96,73% — mengungguli performa masing-masing model secara terpisah."
+      }
+    },
+    {
+      id:4, cat:"ml",
+      title:"PDF RAG Chatbot",
+      summary:"Chatbot berbasis Retrieval-Augmented Generation untuk menjawab pertanyaan dari dokumen PDF.",
+      tools:["Python","LangChain","Google Gemini","FAISS","Streamlit"],
+      star:{
+        s:"Mencari informasi spesifik dari banyak dokumen PDF memakan waktu lama dan tidak efisien.",
+        t:"Membangun chatbot yang bisa menjawab pertanyaan berdasarkan isi dokumen PDF secara kontekstual.",
+        a:"Mengembangkan sistem RAG dengan PDF extraction, text chunking, Sentence Transformers, FAISS per sesi, serta integrasi Google Gemini & riwayat percakapan.",
+        r:"Chatbot mampu memberi respons relevan langsung dari dokumen, dijalankan lewat antarmuka Streamlit yang mudah dipakai."
+      }
+    },
+    {
+      id:5, cat:"web",
+      title:"Sistem Informasi Koperasi (PKM-PI)",
+      summary:"Sistem informasi untuk 50+ anggota koperasi mengelola data, transaksi, dan laporan keuangan.",
+      tools:["Sistem Informasi","Project Leadership","Database"],
+      star:{
+        s:"Koperasi dengan 50+ anggota butuh sistem pengelolaan data & laporan yang lebih rapi dan terpusat.",
+        t:"Memimpin pengembangan sistem informasi koperasi sebagai Project Leader.",
+        a:"Membangun & mengintegrasikan 1.000+ data transaksi secara terpusat untuk anggota, transaksi, dan laporan keuangan.",
+        r:"Meningkatkan efisiensi proses pelaporan sebesar 35% melalui sistem yang terintegrasi."
+      }
+    },
+    {
+      id:6, cat:"web",
+      title:"Sistem Layanan DISKOMINFO Kubu Raya",
+      summary:"Sistem berbasis web untuk mendukung pengelolaan data operasional & pelaporan dinas.",
+      tools:["HTML","CSS","JavaScript","PHP"],
+      star:{
+        s:"DISKOMINFO Kubu Raya butuh sistem web untuk mendukung pengelolaan 5.000+ data operasional.",
+        t:"Membersihkan, menstandarkan, dan menyajikan data operasional lewat sistem berbasis web.",
+        a:"Berkontribusi mengembangkan & memelihara sistem menggunakan HTML, CSS, JavaScript & PHP, sekaligus validasi data dengan stakeholder.",
+        r:"Meningkatkan konsistensi dan akurasi data dalam proses pelaporan dinas."
+      }
+    }
+  ];
+
+  const linkArrow = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg>`;
+
+  function thumbSVG(cat){
+    // simple abstract mockup / chart placeholder per category
+    if(cat==="analytics"){
+      return `<svg viewBox="0 0 400 120" preserveAspectRatio="none"><rect width="400" height="120" fill="#F5B935"/>
+        <rect x="24" y="60" width="26" height="40" fill="#2A1B10" opacity="0.75"/>
+        <rect x="60" y="40" width="26" height="60" fill="#2A1B10" opacity="0.6"/>
+        <rect x="96" y="70" width="26" height="30" fill="#2A1B10" opacity="0.75"/>
+        <rect x="132" y="25" width="26" height="75" fill="#2A1B10" opacity="0.5"/>
+        <circle cx="300" cy="55" r="34" fill="none" stroke="#2A1B10" stroke-width="10" opacity="0.6" stroke-dasharray="70 140"/>
+        <circle cx="300" cy="55" r="34" fill="none" stroke="#2A1B10" stroke-width="10" opacity="0.3" stroke-dasharray="40 170" stroke-dashoffset="-70"/>
+      </svg>`;
+    }
+    if(cat==="ml"){
+      return `<svg viewBox="0 0 400 120" preserveAspectRatio="none"><rect width="400" height="120" fill="#2C7A70"/>
+        <circle cx="60" cy="40" r="7" fill="#FBF1DE"/><circle cx="60" cy="80" r="7" fill="#FBF1DE"/>
+        <circle cx="150" cy="25" r="7" fill="#FBF1DE"/><circle cx="150" cy="60" r="7" fill="#FBF1DE"/><circle cx="150" cy="95" r="7" fill="#FBF1DE"/>
+        <circle cx="240" cy="45" r="7" fill="#FBF1DE"/><circle cx="240" cy="80" r="7" fill="#FBF1DE"/>
+        <circle cx="320" cy="60" r="9" fill="#F5B935"/>
+        <g stroke="#FBF1DE" stroke-width="1.4" opacity="0.55">
+          <line x1="60" y1="40" x2="150" y2="25"/><line x1="60" y1="40" x2="150" y2="60"/><line x1="60" y1="80" x2="150" y2="60"/><line x1="60" y1="80" x2="150" y2="95"/>
+          <line x1="150" y1="25" x2="240" y2="45"/><line x1="150" y1="60" x2="240" y2="45"/><line x1="150" y1="60" x2="240" y2="80"/><line x1="150" y1="95" x2="240" y2="80"/>
+          <line x1="240" y1="45" x2="320" y2="60"/><line x1="240" y1="80" x2="320" y2="60"/>
+        </g>
+      </svg>`;
+    }
+    return `<svg viewBox="0 0 400 120" preserveAspectRatio="none"><rect width="400" height="120" fill="#C6493F"/>
+      <rect x="24" y="20" width="352" height="18" rx="4" fill="#FBF1DE" opacity="0.9"/>
+      <rect x="24" y="48" width="140" height="52" rx="6" fill="#FBF1DE" opacity="0.85"/>
+      <rect x="176" y="48" width="90" height="24" rx="4" fill="#FBF1DE" opacity="0.6"/>
+      <rect x="176" y="78" width="90" height="22" rx="4" fill="#FBF1DE" opacity="0.4"/>
+      <rect x="278" y="48" width="98" height="52" rx="6" fill="#FBF1DE" opacity="0.6"/>
+    </svg>`;
+  }
+
+  // ---------- RENDER PROJECT CARDS ----------
+  const grid = document.getElementById('projGrid');
+  PROJECTS.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'proj-card';
+    card.dataset.cat = p.cat;
+    card.innerHTML = `
+      <div class="proj-thumb ${p.cat}"><span class="cat-chip">${CATS[p.cat].label}</span></div>
+      <div class="proj-body">
+        <h4>${p.title}</h4>
+        <p>${p.summary}</p>
+        <div class="proj-tags">${p.tools.slice(0,3).map(t=>`<span>${t}</span>`).join('')}</div>
+        <div class="proj-link">Lihat detail ${linkArrow}</div>
+      </div>`;
+    card.addEventListener('click', ()=>openModal(p));
+    grid.appendChild(card);
+  });
+
+  // ---------- TABS / FILTER ----------
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      tabBtns.forEach(b=>b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.proj-card').forEach(card=>{
+        const match = cat === 'all' || card.dataset.cat === cat;
+        if(match){
+          card.classList.remove('hide');
+        } else {
+          card.classList.add('hide');
+        }
+      });
+    });
+  });
+
+  // ---------- MODAL ----------
+  const backdrop = document.getElementById('modalBackdrop');
+  const modalHead = document.getElementById('modalHead');
+  const modalCat = document.getElementById('modalCat');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalThumb = document.getElementById('modalThumb');
+  const modalTools = document.getElementById('modalTools');
+  const modalStar = document.getElementById('modalStar');
+  const modalClose = document.getElementById('modalClose');
+
+  const starMeta = [
+    {key:'s', label:'Situation', color:'#E2A317'},
+    {key:'t', label:'Task', color:'#2C7A70'},
+    {key:'a', label:'Action', color:'#C6493F'},
+    {key:'r', label:'Result', color:'#5A4230'}
+  ];
+
+  function openModal(p){
+    modalHead.className = 'modal-head ' + p.cat;
+    modalCat.textContent = CATS[p.cat].label;
+    modalTitle.textContent = p.title;
+    modalThumb.innerHTML = thumbSVG(p.cat);
+    modalTools.innerHTML = p.tools.map(t=>`<span>${t}</span>`).join('');
+    modalStar.innerHTML = starMeta.map(m=>`
+      <div class="star-row">
+        <div class="star-tag" style="color:${m.color}"><span class="sdot" style="background:${m.color}"></span>${m.label}</div>
+        <p>${p.star[m.key]}</p>
+      </div>`).join('');
+    backdrop.classList.add('open');
+    requestAnimationFrame(()=> backdrop.classList.add('show'));
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    backdrop.classList.remove('show');
+    document.body.style.overflow = '';
+    setTimeout(()=> backdrop.classList.remove('open'), 250);
+  }
+  modalClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e)=>{ if(e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+  // ---------- NAV: scroll shadow + mobile menu ----------
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  });
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navLinks.classList.remove('open')));
+
+  // active link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navA = document.querySelectorAll('nav.links a');
+  window.addEventListener('scroll', ()=>{
+    let current = '';
+    sections.forEach(sec=>{
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 120 && rect.bottom >= 120) current = sec.id;
+    });
+    navA.forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+    });
+  });
+
+  // ---------- SCROLL REVEAL ----------
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=> io.observe(el));
+</script>
+</body>
+</html>
